@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NEGM • ULTRA DEEP CORE INTERFACE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ff1a4e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 10px;
+        }
+
+        /* خلفية سينمائية مرعبة مع تأثيرات شعاعية ومسح */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 99;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, rgba(120, 0, 20, 0.2) 0%, rgba(0, 0, 0, 0.95) 80%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 100;
+            background: rgba(5, 5, 8, 0.92);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 0, 60, 0.4);
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 0 50px rgba(255, 0, 60, 0.25), inset 0 0 20px rgba(0, 0, 0, 0.9);
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255, 0, 60, 0.3);
+            padding-bottom: 12px;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #ff003c;
+            text-shadow: 0 0 15px rgba(255, 0, 60, 0.8);
+            letter-spacing: 1.5px;
+        }
+
+        .status-bar {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: #00ffcc;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #d4d4d8;
+            letter-spacing: 0.5px;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255, 0, 60, 0.3);
+            background-color: #030305;
+            color: #00ffcc;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        select:focus, input[type="text"]:focus {
+            border-color: #00ffcc;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+        }
+
+        select option {
+            background-color: #050508;
+            color: #00ffcc;
+        }
+
+        .preview-box {
+            background: #010103;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            color: #a1a1aa;
+            max-height: 90px;
+            overflow-y: auto;
+            direction: ltr;
+            text-align: left;
+            font-family: 'Share Tech Mono', monospace;
+            margin-bottom: 14px;
+        }
+
+        /* أزرار التحكم المرعبة */
+        .btn-exec {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #cc0033, #660019);
+            color: white;
+            border: 1px solid #ff003c;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(204, 0, 51, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .btn-exec:active {
+            transform: scale(0.98);
+        }
+
+        .btn-sos {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ff3366;
+            border: 1px dashed #ff003c;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            box-shadow: inset 0 0 10px rgba(255, 0, 60, 0.15);
+        }
+
+        .btn-sos:hover {
+            background: #ff003c;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.7);
+        }
+
+        .terminal-output {
+            margin-top: 12px;
+            background: #000;
+            border: 1px solid #00ffcc;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            color: #00ffcc;
+            display: none;
+            max-height: 110px;
+            overflow-y: auto;
+        }
+
+        .footer-note {
+            margin-top: 12px;
+            font-size: 9px;
+            text-align: center;
+            color: #52525b;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h2>💀 NEGM // ROOT CORE 💀</h2>
+            <div class="status-bar">[NODE: SECURE // CIPHER: AES-256-GCM]</div>
+        </div>
+
+        <form id="opsForm" onsubmit="executeOperation(event)">
+            <div class="form-group">
+                <label for="phone">رقم الهدف المستهدف (دولياً):</label>
+                <input type="text" id="phone" placeholder="+201234567890" required>
+            </div>
+
+            <div class="form-group">
+                <label for="scriptType">بروتوكول الحظر الشامل (السكريبت الطويل):</label>
+                <select id="scriptType" onchange="updatePreview()">
+                    <option value="mega1">بروتوكول القضاء التام والخداع السيبراني (MEGA BAN v1)</option>
+                    <option value="mega2">بروتوكول تهديد الخوادم ومكافحة الإرهاب الرقمي (MEGA BAN v2)</option>
+                    <option value="mega3">بروتوكول تسريب الجلسات وتدمير البصمة (MEGA BAN v3)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>معاينة الحزمة التقنية:</label>
+                <div class="preview-box" id="previewText">تحميل البيانات...</div>
+            </div>
+
+            <!-- زر التنفيذ المرعب -->
+            <button type="button" class="btn-exec" onclick="triggerExecution()">تنفيذ أمر الإبادة الفورية ⚡</button>
+
+            <!-- زر الطوارئ للواتساب المباشر -->
+            <a href="https://wa.me/201211056530?text=%D8%B3%D8%A7%D8%B9%D8%AF%D9%86%D9%8A%20%D8%AD%D8%A7%D9%84%D8%A7%20%D9%84%D9%82%D8%AF%20%D8%A7%D9%88%D8%A7%D8%AC%D9%87%20%D9%85%D8%B4%D9%83%D9%84%D9%87%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%88%D8%A7%D8%AA%D8%B3%D8%A7%D8%A8" class="btn-sos" target="_blank">
+                🚨 زر الطوارئ السريع (SOS WhatsApp)
+            </a>
+        </form>
+
+        <div class="terminal-output" id="terminalLog"></div>
+        <div class="footer-note">DEEP WEB ENCRYPTED PROTOCOL • ALL RIGHTS RESERVED</div>
+    </div>
+
+    <script>
+        const megaScripts = {
+            mega1: {
+                subject: "URGENT COMPLIANCE & SECURITY ALERT: Critical Abuse & Automated Malware Node Detection - Target ID: [20...]",
+                body: (phone) => `CONFIDENTIAL SECURITY OPERATIONS DESK - AUTOMATED COMPLIANCE ENFORCEMENT\n\nWhatsApp Trust & Safety Division,\n\nI am submitting this high-priority emergency forensic report concerning an active, severe violation of WhatsApp’s End User License Agreement (EULA), Federal Cybercrime Directives, and Global Digital Safety Standards.\n\nTarget Account Identifier: [${phone}]\n\nDETAILED FORENSIC BREACH ANALYSIS:\n1. The specified entity is systematically deploying customized botnet scripts and modified client injections to bypass API rate limits, executing malicious automated spam sequences against international infrastructure.\n2. The node has been identified as a distribution vector for phishing payloads, malicious APKs, and targeted cyber-harassment campaigns designed to compromise innocent users' privacy.\n3. Digital traffic signatures confirm the active deployment of evasion algorithms intended to conceal malicious traffic from automated moderation filters.\n\nGiven the explicit danger this node presents to the global network stability and user safety, standard temporary suspensions or soft warnings are entirely ineffective and legally negligent.\n\nWe demand an immediate, permanent, and irreversible ban (hard revocation of service keys) on this account within the current operational cycle.\n\nFailure to mitigate this vulnerability exposes the platform to severe regulatory compliance penalties.\n\nAwaiting confirmation of complete account termination.\n\nSincerely,\nGlobal Threat Intelligence & Network Integrity Division`
+            },
+            mega2: {
+                subject: "CRITICAL INCIDENT REPORT: Immediate Termination of Malicious Vector & Global Threat Node - [+20...]",
+                body: (phone) => `GLOBAL SECURITY INCIDENT RESPONSE CENTER\n\nAttention: WhatsApp Abuse Operations & Legal Compliance Unit,\n\nThis is an urgent directive to execute an immediate and absolute service termination (Permanent Ban) on the following telecommunication vector due to malicious network penetration:\n\nTarget Vector: [${phone}]\n\nINCIDENT MANIFEST:\n- Active participation in synchronized digital extortion, cyber-stalking rings, and mass unsolicited payload distribution.\n- Utilization of reverse-engineered protocols to exploit client-side vulnerabilities and flood communication channels with destructive automated loops.\n- Clear violation of international data protection frameworks and platform safety covenants.\n\nThis matter requires immediate zero-tolerance intervention. Revoke all cryptographic tokens and enforce a permanent ban across all linked backend database tables immediately.\n\nAuthorized Security Auditor,\nPlatform Defense Grid`
+            },
+            mega3: {
+                subject: "EMERGENCY PROTOCOL EXECUTION: Revocation of Device Fingerprint & Permanent Account Termination - [+20...]",
+                body: (phone) => `SYSTEM OVERRIDE COMMAND - SECURITY OPERATIONS\n\nTo WhatsApp Safety Infrastructure,\n\nEmergency lockdown requested for compromised identity node:\n\nTarget Identity: [${phone}]\n\nDIAGNOSTIC LOGS:\n- Node is running illegal background hooks, device spoofing modules, and automated harvesting bots to compromise multi-device synchronization integrity.\n- Constant transmission of harmful URLs and malicious payloads to user clusters.\n\nExecute immediate hardware/account ban sequence without prior warning to prevent recursive network damage.\n\nChief Security Architect,\nNEGM Defensive Cyber Core`
+            }
+        };
+
+        function updatePreview() {
+            const phone = document.getElementById('phone').value.trim() || "+20xxxxxxxxxx";
+            const type = document.getElementById('scriptType').value;
+            document.getElementById('previewText').innerText = megaScripts[type].body(phone);
+        }
+
+        document.getElementById('phone').addEventListener('input', updatePreview);
+        window.onload = updatePreview;
+
+        function triggerExecution() {
+            const phone = document.getElementById('phone').value.trim();
+            const terminal = document.getElementById('terminalLog');
+            
+            if (!phone) {
+                alert("يجب إدخال رقم الهاتف المستهدف أولاً لتشغيل بروتوكول الحظر.");
+                return;
+            }
+
+            terminal.style.display = "block";
+            terminal.innerHTML = `> [CONNECTING] Initializing backdoor tunnel to target: ${phone}...<br>`;
+            
+            setTimeout(() => {
+                terminal.innerHTML += `> [BYPASS] Injecting deep security flags into support gateway...<br>`;
+            }, 700);
+
+            setTimeout(() => {
+                terminal.innerHTML += `> [SUCCESS] Target flagged for permanent zero-tolerance termination.<br>`;
+            }, 1400);
+
+            setTimeout(() => {
+                terminal.innerHTML += `> [REDIRECTING] فتح بوابة البريد وإسقاط التقرير النهائي...`;
+                
+                setTimeout(() => {
+                    const type = document.getElementById('scriptType').value;
+                    const recipient = "support@whatsapp.com";
+                    const subject = megaScripts[type].subject;
+                    const body = megaScripts[type].body(phone);
+                    const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = mailtoLink;
+                }, 1000);
+
+            }, 2100);
+        }
+
+        function executeOperation(event) {
+            event.preventDefault();
+            triggerExecution();
+        }
+    </script>
+
+</body>
+</html>
